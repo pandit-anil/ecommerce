@@ -1,0 +1,128 @@
+{% extends "master.html" %}
+{% block title %}Post Details{% endblock title %}
+{% block content %}
+
+        <!-- Single Page Header start -->
+        <div class="container-fluid  py-5">
+        </div>
+        <!-- Single Page Header End -->
+
+        <!-- Single Product Start -->
+        <div class="container-fluid py-5 mt-5">
+            <div class="container py-5">
+                <div class="row g-4 mb-5">
+                    <div class="col-lg-8 col-xl-9">
+                        <div class="row g-4">
+                            <div class="col-lg-6">
+                                <div class="border rounded">
+                                    <a href="#">
+                                        <img src="{{posts.image.url}}" class="img-fluid rounded" alt="Image">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <h4 class="fw-bold mb-3">{{posts.title}}</h4>
+                                <p class="mb-3">Category: Vegetables</p>
+                                <h5 class="fw-bold mb-3">${{posts.price}}</h5>
+                                <div class="d-flex mb-4">
+                                    <i class="fa fa-star text-secondary"></i>
+                                    <i class="fa fa-star text-secondary"></i>
+                                    <i class="fa fa-star text-secondary"></i>
+                                    <i class="fa fa-star text-secondary"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <p class="mb-4">{{posts.description}}</p>
+                                <div class="input-group quantity mb-5" style="width: 100px;">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-minus rounded-circle bg-light border" >
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm text-center border-0" value="1">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-plus rounded-circle bg-light border">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <form method="post" action="{% url 'add_to_cart' posts.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"> <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</button>
+                                </form>
+                            </div>
+                            <div class="col-lg-12">
+                                <nav>
+                                    <div class="nav nav-tabs mb-3">
+                                        <button class="nav-link active border-white border-bottom-0" type="button" role="tab"
+                                            id="nav-about-tab" data-bs-toggle="tab" data-bs-target="#nav-about"
+                                            aria-controls="nav-about" aria-selected="true">Description</button>
+                                        <button class="nav-link border-white border-bottom-0" type="button" role="tab"
+                                            id="nav-mission-tab" data-bs-toggle="tab" data-bs-target="#nav-mission"
+                                            aria-controls="nav-mission" aria-selected="false">Reviews</button>
+                                    </div>
+                                </nav>
+                                <div class="tab-content mb-5">
+                                    <div class="tab-pane active" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
+                                        <p>{{posts.description}}</p>
+                                       
+                                    </div>
+                                   
+                                    <div class="tab-pane" id="nav-mission" role="tabpanel" aria-labelledby="nav-mission-tab">
+                                        
+                                        {%for comment in comments%}
+                                        
+                                      
+                                        <div class="d-flex">
+                                            <img src="img/avatar.jpg" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
+                                            <div class="">
+                                                <p class="mb-2" style="font-size: 14px;">April 12, 2024</p>
+                                                <div class="d-flex justify-content-between">
+                                                    <h5>{{comment.author.first_name}}</h5>
+                                                </div>
+                                                <p> {{comment.content}}</p>
+                                            </div>
+                                        </div>
+                                        {%endfor%}
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+
+                            {% if user.is_authenticated %}
+                            <form method="post" action="{% url 'add_comment' posts.id %}">
+                                {% csrf_token %}
+                                <h4 class="mb-5 fw-bold">Leave a Reply</h4>
+                                <div class="row g-4">
+                                    <div class="col-lg-6">
+                                        <div class="border-bottom rounded">
+                                            <input  class="form-control border-0 me-4" placeholder="{{user.username}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="border-bottom rounded">
+                                            <input  class="form-control border-0" placeholder="{{user.email}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="border-bottom rounded my-4">
+                                            <textarea name="content"  class="form-control border-0" cols="30" rows="8" placeholder="Your Review *" spellcheck="false"></textarea>
+                                        </div>
+                                    </div>
+                                            <button type="submit" class="btn border border-secondary text-primary rounded-pill px-4 py-3"> Post Comment</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            {%endif%}
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <!-- Single Product End -->
+
+
+{% endblock content %}

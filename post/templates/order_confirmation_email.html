@@ -1,0 +1,30 @@
+{% load multiply %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Confirmation</title>
+</head>
+<body>
+    <h1>Thank you for your order!</h1>
+    <p>Order ID: {{ order.id }}</p>
+    <p>Order Date: {{ order.created_at }}</p>
+    <p>Order Status: {{ order.is_paid|yesno:"Paid,Not Paid" }}</p>
+    <h2>Order Details</h2>
+    <table>
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total</th>
+        </tr>
+        {% for item in order.items.all %}
+        <tr>
+            <td>{{ item.product.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.price }}</td>
+            
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

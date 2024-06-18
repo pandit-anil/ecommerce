@@ -1,0 +1,206 @@
+{% extends "master.html" %}
+{% block title %}Card{% endblock title %}
+{% block content %}
+<br>
+<br>
+<br>
+
+
+
+{% comment %} 
+<div class="py-3 py-md-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="shopping-cart">
+                    <div class="cart-header d-none d-sm-none d-mb-block d-lg-block">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <h4>Products</h4>
+                            </div>
+                            <div class="col-md-2">
+                                <h4>Price</h4>
+                            </div>
+                            <div class="col-md-2">
+                                <h4>Quantity</h4>
+                            </div>
+                            <div class="col-md-3">
+                                <h4>Remove & Checkout</h4>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {% for item in cart_items %}
+                    <div class="cart-item">
+                        <div class="row">
+                            <div class="col-md-5 my-auto">
+                                <a href="">
+                                    <label class="product-name">
+                                        <img src="{{i.Bpost.image}}" style="width: 50px; height: 50px" alt="">
+                                    </label>
+                                </a>
+                            </div>
+                            <div class="col-md-2 my-auto">
+                                <label class="price"></label>
+                            </div>
+                            <div class="col-md-2 col-7 my-auto">
+                                <div class="quantity">
+                                    <div class="input-group">
+                                        
+                                        <form method="post" action="">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn1">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
+                                                    <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
+                                                </svg>
+                                            </button>
+                                        </form>
+                                        <input type="text" value="{{ i.quantity }}" class="input-quantity" />
+                                        <form method="post" action="">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn1">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                                                </svg>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-5 my-auto">
+                                <div class="remove" style="display:flex;">
+                                    <form method="post" action="" style="margin-right: 10px;">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger btn-sm">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                                <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
+                                            </svg> Remove
+                                        </button>
+                                    </form>
+                                    <a href="" class="btn btn-primary btn-sm">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-check" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M10.854 8.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708 0"/>
+                                            <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/>
+                                        </svg> Check Out
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+
+
+ {% endcomment %}
+
+
+
+
+
+        <!-- Cart Page Start -->
+        <div class="container-fluid py-5">
+            <div class="container py-5">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Products</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Handle</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in cart_items %}
+                            <tr>
+                                <th scope="row">
+                                    <div class="d-flex align-items-center">
+                                        <img src="{{item.product.image.url}}" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
+                                    </div>
+                                </th>
+                                <td>
+                                    <p class="mb-0 mt-4">{{ item.product.title|safe |truncatechars:10}}</p>
+                                </td>
+                                <td>
+                                    <p class="mb-0 mt-4">${{ item.product.price }}</p>
+                                </td>
+                                {% comment %} <td>
+                                    <p class="mb-0 mt-4">{{ item.quantity }}</p>
+                                </td> {% endcomment %}
+                                <td>
+                                    <div class="input-group quantity mt-4" style="width: 100px;">
+                                        <div class="input-group-btn">
+                                            <a href="{% url 'decrease_quantity' item.id %}">
+                                            <button class="btn btn-sm btn-minus rounded-circle bg-light border">
+                                            <i class="fa fa-minus"></i></a>
+                                            </button>
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm text-center border-0" value="{{ item.quantity }}">
+                                        <div class="input-group-btn">
+                                            <a href="{% url 'increase_quantity' item.id %}">
+                                            <button class="btn btn-sm btn-plus rounded-circle bg-light border">
+                                                <i class="fa fa-plus"></i></a>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <p class="mb-0 mt-4">${{ item.get_total_price }}</p>
+                                </td>
+                                <td>
+                                    <form action="{% url 'remove_from_cart' item.id %}" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger">Remove</button>
+                                    </form>
+                                </td>
+                          
+                            </tr>
+                            {%endfor%}
+                        </tbody>
+                    </table>
+                </div>
+                {% comment %} <div class="mt-5">
+                    <input type="text" class="border-0 border-bottom rounded me-5 py-3 mb-4" placeholder="Coupon Code">
+                    <button class="btn border-secondary rounded-pill px-4 py-3 text-primary" type="button">Apply Coupon</button>
+                </div> {% endcomment %}
+                <div class="row g-4 justify-content-end">
+                    <div class="col-8"></div>
+                    <div class="col-sm-8 col-md-7 col-lg-6 col-xl-4">
+                        <div class="bg-light rounded">
+                            <div class="p-4">
+                                <h1 class="display-6 mb-4">Cart <span class="fw-normal">Total</span></h1>
+                                {% comment %} <div class="d-flex justify-content-between mb-4">
+                                    <h5 class="mb-0 me-4">Subtotal:</h5>
+                                    <p class="mb-0">$96.00</p>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <h5 class="mb-0 me-4">Shipping</h5>
+                                    <div class="">
+                                        <p class="mb-0">Flat rate: $3.00</p>
+                                    </div>
+                                </div>
+                                <p class="mb-0 text-end">Shipping to Ukraine.</p>
+                            </div> {% endcomment %}
+                            <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
+                                <h5 class="mb-0 ps-4 me-4">Total</h5>
+                                <p class="mb-0 pe-4"> ${{ total }}</p>
+                            </div>
+                            <a href="{% url 'checkout'%}"><button class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" type="button">Proceed Checkout</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Cart Page End -->
+
+{% endblock content %}
+

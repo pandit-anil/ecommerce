@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category Posts</title>
+    <style>
+        .category {
+            margin-bottom: 30px;
+        }
+        .post {
+            margin-bottom: 20px;
+        }
+        .post img {
+            max-width: 200px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Posts by Category</h1>
+    {% for category, posts in category_posts_data.items %}
+        <div class="category">
+            <h2>{{ category.cname }}</h2>
+            {% for post in posts %}
+                <div class="post">
+                    <h3>{{ post.title }}</h3>
+                    <p>{{ post.description }}</p>
+                    <p>Price: ${{ post.price }}</p>
+                    {% if post.image %}
+                        <img src="{{ post.image.url }}" alt="{{ post.title }}">
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+</body>
+</html>
