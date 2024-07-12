@@ -85,7 +85,7 @@ class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.id
+        return self.user.first_name
 
 
 class Comment(models.Model):

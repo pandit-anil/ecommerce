@@ -1,5 +1,5 @@
 from django.contrib import admin
-from . models import Bpost,Systemsetting,Category,CustomerFeedback,Clients
+from . models import Bpost,Systemsetting,Category,CustomerFeedback,Clients,Order
 
 # Register your models here.
 
@@ -15,4 +15,5 @@ class Feedback(admin.ModelAdmin):
 
 admin.site.register(Category)
 admin.site.register(Clients)
+admin.site.register(Order)
 
